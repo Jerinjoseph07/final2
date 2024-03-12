@@ -6,6 +6,7 @@ const loginModel = require("./login");
 const Workermodel = require("./WorkerReg");
 const Clientmodel = require("./ClientReg");
 const addworkmodel = require("./addwork");
+const appmodel = require("./booking");
 const storage = multer.memoryStorage(); // Store images in memory
 const upload = multer({ storage: storage })
 app.use(express.urlencoded({extended:true}))
@@ -140,4 +141,29 @@ app.get("/view/:id", async (request, response) => {
   var data = await addworkmodel.findById(id);
   console.log(data);
   response.send(data);
+});
+
+
+app.get("/view/:id", async (request, response) => {
+  const { id } = request.params;
+  var data = await WorkerReg.findById(id);
+  console.log(data);
+  response.send(data);
+});
+app.get("/book/:id", async (request, response) => {
+  const { id } = request.params;
+  var data = await appmodel.findById(id);
+  console.log(data);
+  response.send(data);
+});
+
+app.post("/booking",  async (request, response) => {
+  console.log(request.body)
+   new appmodel(request.body).save();
+   response.send("Record Saved")
+})
+
+app.get('/booking', async (request, response) => {
+  var data = await appmodel.find();
+  response.send(data)
 });

@@ -4,6 +4,7 @@ mongoose.connect("mongodb+srv://jerin:jerin@cluster0.crsjo7n.mongodb.net/data?re
 .catch(err=>console.log(err));
 const Workerschema=new mongoose.Schema(
     {
+        wid: { type: mongoose.Schema.Types.ObjectId},
     name:String,
     phone:Number,
     job:String,
